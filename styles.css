@@ -1,0 +1,32 @@
+button {
+  padding: 5px 40px;
+}
+
+#dot {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 44px;
+}
+
+#ac {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 28px;
+}
+
+.floatDivide {
+  display: flex;
+}
+
+.floatEquals {
+  display: flex;;
+}
+
+#equals {
+  padding: 49px 38px;
+  background-color: #ff7373;
+}
+
+#calc {
+  background-color: black;
+}

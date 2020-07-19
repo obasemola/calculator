@@ -8,41 +8,54 @@
   <title>Document</title>
 </head>
 <body>
-  <div>
+
+  <div id="container">
     <div>
-      <span>x</span>
-      <span>-</span>
+      <textarea name="calc" id="calc" cols="50" rows="5"></textarea>
     </div>
 
-    <div>
-      <span>Calculator</span>
+    <div class="floatDivide">
+      <div>
+        <button>+</button>
+        <button>-</button>
+        <button>&times;</button>
+      </div>
+      <div>
+        <button>&divide;</button>
+      </div>
+    </div>
+
+    <div class="floatEquals">
+      <div>
+        <div>
+          <button>7</button>
+          <button>8</button>
+          <button>9</button>
+        </div>
+        <div>
+          <button>4</button>
+          <button>5</button>
+          <button>6</button>
+        </div>
+        <div>
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+        </div>
+        <div>
+          <button>0</button>
+          <button id="dot">.</button>
+          <button id="ac">AC</button>
+        </div>
+      </div>
+
+      <div>
+        <button id="equals">=</button>
+      </div>
     </div>
   </div>
 
-  <div>
-    <textarea name="calc" id="calc" cols="60" rows="5"></textarea>
-  </div>
 
-  <div>
-    <button>+</button>
-    <button>-</button>
-    <button>&times;</button>
-    <button>&divide;</button>
-    <button>7</button>
-    <button>8</button>
-    <button>9</button>
-    <button>4</button>
-    <button>5</button>
-    <button>6</button>
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>0</button>
-    <button>.</button>
-    <button>AC</button>
-    <button>=</button>
-  </div>
-
-  <div></div>
+  
 </body>
 </html>
