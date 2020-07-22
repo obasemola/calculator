@@ -1,14 +1,27 @@
+#container {
+  border-radius: 50;
+}
+
+#calculatorDisplay {
+  background-color: black;
+  padding: 30px;
+  width: 310px;
+  text-align: right;
+  color: #fff;
+  font-size: 50px;
+}
+
 button {
   padding: 5px 40px;
 }
 
-#dot {
+#decimal {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 44px;
 }
 
-#ac {
+#clear {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 28px;
