@@ -17,6 +17,19 @@ keys.addEventListener('click', (e) => {
     });
     // console.log(keyAction, keyNum, displayedNum)
   }
+
+  if (
+    keyAction === 'add' ||
+    keyAction === 'subtract' ||
+    keyAction === 'divide' ||
+    keyAction === 'multiply'
+    ) {
+      key.classList.add('pressed');
+      calculator.dataset.typeOfPreviousKey = 'operator';
+      calculator.dataset.firstValue = displayedNum;
+      calculator.dataset.operator = keyAction;
+    }
+
   const typeOfPreviousKey = calculator.dataset.typeOfPreviousKey;
 
   if(!keyAction) {
@@ -36,23 +49,12 @@ keys.addEventListener('click', (e) => {
     display.textContent = '';
   }
 
-  if (
-    keyAction === 'add' ||
-    keyAction === 'subtract' ||
-    keyAction === 'divide' ||
-    keyAction === 'multiply'
-    ) {
-      key.classList.add('pressed');
-      calculator.dataset.typeOfPreviousKey = 'operator';
-      calculator.dataset.firstValue = displayedNum;
-      calculator.dataset.operator = keyAction;
-    }
-
   if (keyAction === 'equals') {
     const operator = calculator.dataset.operator;
     const secondValue = displayedNum;
     const firstValue = calculator.dataset.firstValue;
     calculate(firstValue, operator, secondValue);
+    calculator.dataset.typeOfPreviousKey = '';
   }
 
 });
@@ -62,15 +64,15 @@ keys.addEventListener('click', (e) => {
 const calculate = (n1, operator, n2) => { 
   let result = '';
   if (operator === 'add') {
-    result = n1 + n2
+    result = parseFloat(n1 + n2);
   } else if (operator === 'subtract') {
-    result = n1 - n2
+    result = parseFloat(n1 - n2);
   } else if (operator === 'multiply') {
-    result = n1 * n2
+    result = parseFloat(n1 * n2);
   } else if (operator === 'divide') {
-    result = n1 / n2
+    result = parseFloat(n1 / n2)
   }
 
-  console.log(result);
+  display.textContent = result;
   
 }
