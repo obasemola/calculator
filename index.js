@@ -33,11 +33,13 @@ keys.addEventListener('click', (e) => {
   const typeOfPreviousKey = calculator.dataset.typeOfPreviousKey;
 
   if(!keyAction) {
-    if(displayedNum === '0' || typeOfPreviousKey === 'operator') {
-      display.textContent = keyNum
+    if(displayedNum === '0' || typeOfPreviousKey === 'operator' || typeOfPreviousKey === 'equals') {
+      display.textContent = keyNum;
+      calculator.dataset.typeOfPreviousKey = '';
     } else
     {
-      display.textContent = displayedNum + keyNum
+      display.textContent = displayedNum + keyNum;
+      calculator.dataset.typeOfPreviousKey = '';
     }
   }
   
@@ -54,7 +56,7 @@ keys.addEventListener('click', (e) => {
     const secondValue = displayedNum;
     const firstValue = calculator.dataset.firstValue;
     calculate(firstValue, operator, secondValue);
-    calculator.dataset.typeOfPreviousKey = '';
+    calculator.dataset.typeOfPreviousKey = 'equals';
   }
 
 });
