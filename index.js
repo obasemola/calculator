@@ -42,20 +42,32 @@ keys.addEventListener('click', (e) => {
       calculator.dataset.typeOfPreviousKey = '';
     }
   }
+
+  if (!keyAction) {
+    
+  }
   
   if (keyAction === "decimal") {
-    display.textContent = displayedNum + '.';
+    if(!displayedNum.includes('.')) {
+      display.textContent = displayedNum + '.';
+    }
+  }
+
+  if (keyAction === 'decimal') {
+    if (typeOfPreviousKey === 'operator') {
+      display.textContent = '0.'
+    }
   }
 
   if(keyAction === 'clear') {
-    display.textContent = '';
+    display.textContent = '0';
   }
 
   if (keyAction === 'equals') {
     const operator = calculator.dataset.operator;
     const secondValue = displayedNum;
     const firstValue = calculator.dataset.firstValue;
-    calculate(firstValue, operator, secondValue);
+    calculate(parseFloat(firstValue), operator, parseFloat(secondValue));
     calculator.dataset.typeOfPreviousKey = 'equals';
   }
 
