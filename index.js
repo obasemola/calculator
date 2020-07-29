@@ -18,6 +18,8 @@ keys.addEventListener('click', (e) => {
     // console.log(keyAction, keyNum, displayedNum)
   }
 
+  const typeOfPreviousKey = calculator.dataset.typeOfPreviousKey;
+
   if (
     keyAction === 'add' ||
     keyAction === 'subtract' ||
@@ -26,11 +28,18 @@ keys.addEventListener('click', (e) => {
     ) {
       const firstValue = parseFloat(calculator.dataset.firstValue);
       const operator = calculator.dataset.operator;
-      const secondValue = parseFloat(displayedNum);
+      let secondValue = parseFloat(displayedNum);
 
-      if(firstValue && operator) {
-        display.textContent = calculate(firstValue, operator, secondValue)
-
+      if(
+        firstValue &&
+        operator &&
+        typeOfPreviousKey !== 'operator') {
+        const showResult = calculate(firstValue, operator, secondValue);
+        console.log(showResult);
+        display.textContent = showResult;
+        calculator.dataset.firstValue = showResult;
+      } else {
+        calculator.dataset.firstValue = displayedNum;
       }
 
     key.classList.add('pressed');
@@ -39,23 +48,7 @@ keys.addEventListener('click', (e) => {
     calculator.dataset.operator = keyAction;
   }
   
-  const anotherTypeOfPreviousKey = calculator.dataset.anotherTypeOfPreviousKey;
 
-  // if
-  //   // (keyAction === 'add' ||
-  //   // keyAction === 'subtract' ||
-  //   // keyAction === 'divide' ||
-  //   // keyAction === 'multiply') {
-  //   //   const firstValue = parseFloat(calculator.dataset.firstValue);
-  //   //   const operator = calculator.dataset.operator;
-  //   //   const secondValue = parseFloat(displayedNum);
-  //   //   calculate(firstValue, operator, secondValue);
-  //   //   if(firstValue && operator) {
-  //   //     display.textContent = calculate(firstValue, operator, secondValue)
-  //   //   }
-  //   //     }
-
-  const typeOfPreviousKey = calculator.dataset.typeOfPreviousKey;
 
   if(!keyAction) {
     if(displayedNum === '0' || typeOfPreviousKey === 'operator' || typeOfPreviousKey === 'equals') {
@@ -90,10 +83,12 @@ keys.addEventListener('click', (e) => {
 
   if (keyAction === 'equals') {
     const operator = calculator.dataset.operator;
-    const secondValue = parseFloat(displayedNum);
+    let secondValue = parseFloat(displayedNum);
     let firstValue = parseFloat(calculator.dataset.firstValue);
-    calculate(firstValue, operator, secondValue);
+    const resultEquals = calculate(firstValue, operator, secondValue);
+    display.textContent = resultEquals;
     calculator.dataset.typeOfPreviousKey = 'equals';
+
   }
 
 });
@@ -111,8 +106,5 @@ const calculate = (n1, operator, n2) => {
   } else if (operator === 'divide') {
     result = parseFloat(n1 / n2)
   }
-
-  display.textContent = result;
-  calculator.dataset.firstValue = result;
   return result;
 }
