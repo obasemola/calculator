@@ -24,27 +24,52 @@ keys.addEventListener('click', (e) => {
     keyAction === 'divide' ||
     keyAction === 'multiply'
     ) {
-      key.classList.add('pressed');
-      calculator.dataset.typeOfPreviousKey = 'operator';
-      calculator.dataset.firstValue = displayedNum;
-      calculator.dataset.operator = keyAction;
-    }
+      const firstValue = parseFloat(calculator.dataset.firstValue);
+      const operator = calculator.dataset.operator;
+      const secondValue = parseFloat(displayedNum);
+
+      if(firstValue && operator) {
+        display.textContent = calculate(firstValue, operator, secondValue)
+
+      }
+
+    key.classList.add('pressed');
+    calculator.dataset.typeOfPreviousKey = 'operator';
+    calculator.dataset.firstValue = displayedNum;
+    calculator.dataset.operator = keyAction;
+  }
+  
+  const anotherTypeOfPreviousKey = calculator.dataset.anotherTypeOfPreviousKey;
+
+  // if
+  //   // (keyAction === 'add' ||
+  //   // keyAction === 'subtract' ||
+  //   // keyAction === 'divide' ||
+  //   // keyAction === 'multiply') {
+  //   //   const firstValue = parseFloat(calculator.dataset.firstValue);
+  //   //   const operator = calculator.dataset.operator;
+  //   //   const secondValue = parseFloat(displayedNum);
+  //   //   calculate(firstValue, operator, secondValue);
+  //   //   if(firstValue && operator) {
+  //   //     display.textContent = calculate(firstValue, operator, secondValue)
+  //   //   }
+  //   //     }
 
   const typeOfPreviousKey = calculator.dataset.typeOfPreviousKey;
 
   if(!keyAction) {
     if(displayedNum === '0' || typeOfPreviousKey === 'operator' || typeOfPreviousKey === 'equals') {
       display.textContent = keyNum;
-      calculator.dataset.typeOfPreviousKey = '';
+      calculator.dataset.typeOfPreviousKey = 'number';
     } else
     {
       display.textContent = displayedNum + keyNum;
-      calculator.dataset.typeOfPreviousKey = '';
+      calculator.dataset.typeOfPreviousKey = 'number';
     }
   }
 
-  if (!keyAction) {
-    
+  if (displayedNum === '0.') {
+    display.textContent = displayedNum + keyNum;
   }
   
   if (keyAction === "decimal") {
@@ -65,9 +90,9 @@ keys.addEventListener('click', (e) => {
 
   if (keyAction === 'equals') {
     const operator = calculator.dataset.operator;
-    const secondValue = displayedNum;
-    const firstValue = calculator.dataset.firstValue;
-    calculate(parseFloat(firstValue), operator, parseFloat(secondValue));
+    const secondValue = parseFloat(displayedNum);
+    let firstValue = parseFloat(calculator.dataset.firstValue);
+    calculate(firstValue, operator, secondValue);
     calculator.dataset.typeOfPreviousKey = 'equals';
   }
 
@@ -88,5 +113,6 @@ const calculate = (n1, operator, n2) => {
   }
 
   display.textContent = result;
-  
+  calculator.dataset.firstValue = result;
+  return result;
 }
